@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MLB 賽事系統分析 - 投打對決策略與數據監控 (Pitching Strategy & Hitting Dynamics) - 線上複習</title>
+<style>
+  body { background:#0f172a; color:#e2e8f0; font-family:"Microsoft JhengHei",Arial,sans-serif; margin:0; }
+  .layout { display:flex; gap:20px; padding:20px; align-items:flex-start; flex-wrap:wrap; }
+  .player-col { position:sticky; top:20px; flex:0 0 480px; }
+  .player-col iframe { width:480px; height:270px; border:0; border-radius:8px; }
+  .subject { font-size:18px; font-weight:bold; margin:12px 0; color:#72ef95; }
+  .list-col { flex:1; min-width:320px; }
+  .qcard { background:#1e293b; border-radius:8px; padding:14px 16px; margin-bottom:14px; }
+  .cloze-card { border-left:4px solid #ff6b6b; }
+  .qcard-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .qnum { color:#64B5F6; font-weight:bold; }
+  .ts-btn { background:#2196F3; color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px; }
+  .ts-btn:hover { background:#1769aa; }
+  .q-text { font-size:16px; line-height:1.6; margin-bottom:6px; }
+  .q-options { color:#cbd5e1; font-size:14px; line-height:1.8; margin-bottom:6px; }
+  .q-zh { color:#94a3b8; font-size:13px; margin:6px 0; }
+  .explain { color:#cbd5e1; font-size:13px; margin-top:6px; }
+  .tag { display:inline-block; margin-top:8px; background:rgba(250,82,82,0.15); color:#ff6b6b; padding:2px 8px; border-radius:4px; font-size:12px; }
+  details { margin-top:8px; }
+  summary { cursor:pointer; color:#64B5F6; font-size:13px; }
+  .answer { margin-top:8px; color:#72ef95; font-weight:bold; }
+  .blank { background:rgba(255,236,153,0.3); border-radius:3px; padding:1px 4px; cursor:pointer; }
+  .blank .blank-inner { visibility:hidden; }
+  .blank.revealed { background:rgba(255,236,153,0.7); }
+  .blank.revealed .blank-inner { visibility:visible; color:#d9480f; font-weight:bold; }
+  .blank:not(.revealed) .blank-inner::before { content:"﹍﹍﹍"; visibility:visible; color:#facc15; }
+  h2 { margin:16px 20px 0; }
+
+  .lang-toggle { display:flex; align-items:center; gap:8px; margin:0 20px 16px; font-size:13px; color:#94a3b8; }
+  .lang-btn { background:#1e293b; color:#cbd5e1; border:1px solid #334155; padding:5px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  .lang-btn.active { background:#2196F3; color:#fff; border-color:#2196F3; }
+
+  .hoverable { position:relative; display:block; border-bottom:1px dotted #64B5F6; cursor:help; width:fit-content; }
+  .q-options .hoverable { margin-bottom:4px; }
+  .hoverable .tooltip {
+    display:none; position:absolute; left:0; top:100%; margin-top:6px;
+    background:#0f172a; border:1px solid #64B5F6; color:#e2e8f0;
+    padding:6px 10px; border-radius:6px; font-size:13px; white-space:normal;
+    max-width:380px; z-index:50; box-shadow:0 4px 10px rgba(0,0,0,.4);
+  }
+  .hoverable:hover .tooltip { display:block; }
+  a.back { display:inline-block; margin:16px 20px 0; color:#64B5F6; font-size:13px; text-decoration:none; }
+</style>
+</head>
+<body>
+<a class="back" href="./index.html">← 回複習清單</a>
+<div class="lang-toggle">
+  顯示語言:
+  <button id="btn-zh" class="lang-btn active" onclick="setLang('zh')">中文為主</button>
+  <button id="btn-en" class="lang-btn" onclick="setLang('en')">English 為主</button>
+  <span style="opacity:0.7;">(滑鼠移到題目/選項上可看另一種語言)</span>
+</div>
+<div class="layout">
+  <div class="player-col">
+    <div class="subject">MLB 賽事系統分析 - 投打對決策略與數據監控 (Pitching Strategy & Hitting Dynamics)</div>
+    <div id="player"></div>
+  </div>
+  <div class="list-col">
+    <h3>📝 選擇題</h3>
+    
+        <div class="qcard ">
+          <div class="qcard-head"><span class="qnum">選擇題 1</span><button class="ts-btn" onclick="seekTo(23)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="hoverable q-text" data-zh="根據系統教官對 Ranger Suarez 的性能分析，下列何者為其投球系統的主要限制 (Limitation)？" data-en="Based on the performance analysis of Ranger Suarez, which of the following is a primary &#x27;Limitation&#x27; of his pitching system?"><span class="main-text"></span><span class="tooltip"></span></div>
+          <div class="q-options"><div class="hoverable q-option" data-zh="(A) 球速高於 95 mph 但控球不穩定" data-en="(A) Pitch velocity above 95 mph with unstable control"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(B) 伸卡球與四縫線速球的均速皆未達 92 mph" data-en="(B) Average velocity of sinker and four-seam fastball both below 92 mph"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(C) 缺乏有效的變化球作為引誘球" data-en="(C) Lack of effective breaking balls as decoy pitches"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(D) 處於傷兵名單中無法執行任務" data-en="(D) Currently on the injury list and unable to perform"><span class="main-text"></span><span class="tooltip"></span></div></div>
+          <details><summary>看答案與解析</summary>
+            <div class="answer">正解:(B)</div>
+            <div class="explain">根據教官在 00:23 的分析，Suarez 的 Sinker 與 Four-seam 均速均未達 92 mph，屬於球速較慢的技巧派投球系統 (Finesse pitcher system)。</div>
+          </details>
+        </div>
+        </div>
+        <div class="qcard ">
+          <div class="qcard-head"><span class="qnum">選擇題 2</span><button class="ts-btn" onclick="seekTo(297)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="hoverable q-text" data-zh="在大谷翔平於五局下半擊出的全壘打任務中，系統監控到的關鍵動力數據為何？" data-en="In Shohei Ohtani&#x27;s home run mission during the bottom of the 5th, what were the key dynamic parameters monitored by the system?"><span class="main-text"></span><span class="tooltip"></span></div>
+          <div class="q-options"><div class="hoverable q-option" data-zh="(A) 擊球初速 100 mph，飛行距離 400 英尺" data-en="(A) Exit velocity 100 mph, distance 400 ft"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(B) 仰角 30 度，擊球初速 112.1 mph" data-en="(B) Launch angle 30 degrees, exit velocity 112.1 mph"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(C) 擊球初速 112.1 mph，仰角 24 度" data-en="(C) Exit velocity 112.1 mph, launch angle 24 degrees"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(D) 仰角 24 度，飛行距離 450 英尺" data-en="(D) Launch angle 24 degrees, distance 450 ft"><span class="main-text"></span><span class="tooltip"></span></div></div>
+          <details><summary>看答案與解析</summary>
+            <div class="answer">正解:(C)</div>
+            <div class="explain">系統數據顯示該次擊球 (Execution) 的 Exit Velocity 為 112.1 mph，Launch Angle 為 24 度，這是一次典型的「平射炮」式全壘打運作邏輯。</div>
+          </details>
+        </div>
+        </div>
+        <div class="qcard ">
+          <div class="qcard-head"><span class="qnum">選擇題 3</span><button class="ts-btn" onclick="seekTo(50)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="hoverable q-text" data-zh="針對 Ranger Suarez 的投球策略，教官指出其投球系統中哪一項指標異常優秀？" data-en="Regarding Ranger Suarez&#x27;s pitching strategy, which metric in his system was identified as being exceptionally high?"><span class="main-text"></span><span class="tooltip"></span></div>
+          <div class="q-options"><div class="hoverable q-option" data-zh="(A) 四縫線速球的轉速 (Spin Rate)" data-en="(A) Four-seam fastball spin rate"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(B) 每九局三振率 (K/9) 達到 9.72" data-en="(B) K/9 rate reaching 9.72"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(C) 滾地球出局率超過 60%" data-en="(C) Ground ball rate exceeding 60%"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(D) 第一球好球率 (F-Strike%) 高達 75%" data-en="(D) First-pitch strike percentage (F-Strike%) as high as 75%"><span class="main-text"></span><span class="tooltip"></span></div></div>
+          <details><summary>看答案與解析</summary>
+            <div class="answer">正解:(B)</div>
+            <div class="explain">影片 00:50 提到 Suarez 雖然球速不快，但今年的 K/9 值高達 9.72，顯示其配球與進壘點系統 (Pitching Repertoire) 具有高度效能。</div>
+          </details>
+        </div>
+        </div>
+    <h3>🧠 背誦重點(點空格看答案)</h3>
+    
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 1</span><button class="ts-btn" onclick="seekTo(23)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">Ranger Suarez 的投球系統性能顯示，其 Sinker 與 Four-seam 均速均未達 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">92</span></span> mph。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">Ranger Suarez 的投球系統性能顯示，其伸卡球與四縫線速球均速均未達 92 英里。</div>
+            <div class="explain">這是區分 Power Pitcher 與 Finesse Pitcher 的關鍵運作參數限制。</div>
+          </details>
+          <div class="tag">Limitations / Performance</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 2</span><button class="ts-btn" onclick="seekTo(291)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">大谷翔平在該場比賽擊出了本賽季的第 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">24</span></span> 支全壘打。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">大谷翔平在該場比賽擊出了本賽季的第 24 支全壘打。</div>
+            <div class="explain">此數據為該受測員目前的累積績效指標 (Key Performance Indicator)。</div>
+          </details>
+          <div class="tag">Statistics / Achievement</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 3</span><button class="ts-btn" onclick="seekTo(297)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">大谷全壘打的擊球初速 (Exit Velocity) 經量測為 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">112.1</span></span> mph。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">大谷全壘打的擊球初速 (Exit Velocity) 經量測為 112.1 英里。</div>
+            <div class="explain">初速是評估打擊輸出能量 (Power Output) 的核心數值。</div>
+          </details>
+          <div class="tag">Dynamics / Data-Point</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 4</span><button class="ts-btn" onclick="seekTo(297)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">大谷全壘打的擊球仰角 (Launch Angle) 經系統判定為 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">24</span></span> 度。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">大谷全壘打的擊球仰角 (Launch Angle) 經系統判定為 24 度。</div>
+            <div class="explain">仰角決定了飛行彈道 (Trajectory) 是否能避開防禦系統並成功越牆。</div>
+          </details>
+          <div class="tag">Dynamics / Trajectory</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 5</span><button class="ts-btn" onclick="seekTo(147)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">大谷翔平在四局下半擊出了道奇隊在該局的第 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">1</span></span> 支安打。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">大谷翔平在四局下半擊出了道奇隊在該局的第 1 支安打。</div>
+            <div class="explain">這是打破對手「無安打」(No-hit) 狀態的關鍵系統解鎖 (System Unlock)。</div>
+          </details>
+          <div class="tag">Game-Log / Sequence</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 6</span><button class="ts-btn" onclick="seekTo(4)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">Ranger Suarez 在本場比賽前的勝敗紀錄為 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">4-3</span></span>。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">Ranger Suarez 在本場比賽前的勝敗紀錄為 4 勝 3 敗。</div>
+            <div class="explain">此數據反映了該系統過往的任務成功率 (Mission Success Rate)。</div>
+          </details>
+          <div class="tag">Profile / Records</div>
+        </div>
+        </div>
+  </div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  var player;
+  var primaryLang = 'zh';
+  var embedBlocked = false;
+  var VIDEO_ID = '4yDxTLq67iw';
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '270',
+      width: '480',
+      videoId: VIDEO_ID,
+      playerVars: { 'playsinline': 1, 'origin': window.location.origin },
+      events: { 'onError': onPlayerError }
+    });
+  }
+  function onPlayerError(event) {
+    // 101 / 150 = 影片擁有者禁止嵌入播放,100 = 影片不存在或設為私人,5 = HTML5播放器錯誤
+    if ([101, 150, 100, 5].indexOf(event.data) !== -1) {
+      embedBlocked = true;
+    }
+  }
+  function seekTo(seconds) {
+    if (embedBlocked || !player || !player.seekTo) {
+      window.open('https://www.youtube.com/watch?v=' + VIDEO_ID + '&t=' + seconds + 's', '_blank');
+      return;
+    }
+    player.seekTo(seconds, true);
+    player.playVideo();
+  }
+
+  function applyLang() {
+    var otherLang = primaryLang === 'zh' ? 'en' : 'zh';
+    document.querySelectorAll('.hoverable').forEach(function(el) {
+      var mainEl = el.querySelector('.main-text');
+      var tipEl = el.querySelector('.tooltip');
+      mainEl.textContent = el.dataset[primaryLang] || '';
+      tipEl.textContent = el.dataset[otherLang] || '';
+    });
+  }
+
+  function setLang(lang) {
+    primaryLang = lang;
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    applyLang();
+  }
+
+  document.addEventListener('DOMContentLoaded', applyLang);
+</script>
+</body>
+</html>
