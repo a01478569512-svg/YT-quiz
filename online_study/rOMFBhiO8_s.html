@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mercedes-Benz A250 (W177) 系統診斷與二手車鑑定邏輯 - 線上複習</title>
+<style>
+  body { background:#0f172a; color:#e2e8f0; font-family:"Microsoft JhengHei",Arial,sans-serif; margin:0; }
+  .layout { display:flex; gap:20px; padding:20px; align-items:flex-start; flex-wrap:wrap; }
+  .player-col { position:sticky; top:20px; flex:0 0 480px; }
+  .player-col iframe { width:480px; height:270px; border:0; border-radius:8px; }
+  .subject { font-size:18px; font-weight:bold; margin:12px 0; color:#72ef95; }
+  .list-col { flex:1; min-width:320px; }
+  .qcard { background:#1e293b; border-radius:8px; padding:14px 16px; margin-bottom:14px; }
+  .cloze-card { border-left:4px solid #ff6b6b; }
+  .qcard-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .qnum { color:#64B5F6; font-weight:bold; }
+  .ts-btn { background:#2196F3; color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px; }
+  .ts-btn:hover { background:#1769aa; }
+  .q-text { font-size:16px; line-height:1.6; margin-bottom:6px; }
+  .q-options { color:#cbd5e1; font-size:14px; line-height:1.8; margin-bottom:6px; }
+  .q-zh { color:#94a3b8; font-size:13px; margin:6px 0; }
+  .explain { color:#cbd5e1; font-size:13px; margin-top:6px; }
+  .tag { display:inline-block; margin-top:8px; background:rgba(250,82,82,0.15); color:#ff6b6b; padding:2px 8px; border-radius:4px; font-size:12px; }
+  details { margin-top:8px; }
+  summary { cursor:pointer; color:#64B5F6; font-size:13px; }
+  .answer { margin-top:8px; color:#72ef95; font-weight:bold; }
+  .blank { background:rgba(255,236,153,0.3); border-radius:3px; padding:1px 4px; cursor:pointer; }
+  .blank .blank-inner { visibility:hidden; }
+  .blank.revealed { background:rgba(255,236,153,0.7); }
+  .blank.revealed .blank-inner { visibility:visible; color:#d9480f; font-weight:bold; }
+  .blank:not(.revealed) .blank-inner::before { content:"﹍﹍﹍"; visibility:visible; color:#facc15; }
+  h2 { margin:16px 20px 0; }
+
+  .lang-toggle { display:flex; align-items:center; gap:8px; margin:0 20px 16px; font-size:13px; color:#94a3b8; }
+  .lang-btn { background:#1e293b; color:#cbd5e1; border:1px solid #334155; padding:5px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  .lang-btn.active { background:#2196F3; color:#fff; border-color:#2196F3; }
+
+  .hoverable { position:relative; display:block; border-bottom:1px dotted #64B5F6; cursor:help; width:fit-content; }
+  .q-options .hoverable { margin-bottom:4px; }
+  .hoverable .tooltip {
+    display:none; position:absolute; left:0; top:100%; margin-top:6px;
+    background:#0f172a; border:1px solid #64B5F6; color:#e2e8f0;
+    padding:6px 10px; border-radius:6px; font-size:13px; white-space:normal;
+    max-width:380px; z-index:50; box-shadow:0 4px 10px rgba(0,0,0,.4);
+  }
+  .hoverable:hover .tooltip { display:block; }
+  a.back { display:inline-block; margin:16px 20px 0; color:#64B5F6; font-size:13px; text-decoration:none; }
+</style>
+</head>
+<body>
+<a class="back" href="./index.html">← 回複習清單</a>
+<div class="lang-toggle">
+  顯示語言:
+  <button id="btn-zh" class="lang-btn active" onclick="setLang('zh')">中文為主</button>
+  <button id="btn-en" class="lang-btn" onclick="setLang('en')">English 為主</button>
+  <span style="opacity:0.7;">(滑鼠移到題目/選項上可看另一種語言)</span>
+</div>
+<div class="layout">
+  <div class="player-col">
+    <div class="subject">Mercedes-Benz A250 (W177) 系統診斷與二手車鑑定邏輯</div>
+    <div id="player"></div>
+  </div>
+  <div class="list-col">
+    <h3>📝 選擇題</h3>
+    
+        <div class="qcard ">
+          <div class="qcard-head"><span class="qnum">選擇題 1</span><button class="ts-btn" onclick="seekTo(265)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="hoverable q-text" data-zh="當診斷電腦顯示故障碼 P13C204 且車主反映加滿油後難以發動、怠速不穩時，根據影片鑑定結果，最核心的系統問題為何？" data-en="When the diagnostic tool shows fault code P13C204 and the owner reports hard starting after refueling and rough idling, what is the core system issue based on the inspection?"><span class="main-text"></span><span class="tooltip"></span></div>
+          <div class="q-options"><div class="hoverable q-option" data-zh="(A) 燃油壓力調節器損壞" data-en="(A) Damaged Fuel Pressure Regulator"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(B) 廢氣風門 (Exhaust Flap) 存在功能故障" data-en="(B) Functional failure of the Exhaust Flap"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(C) 火星塞積碳過多" data-en="(C) Excessive carbon buildup on spark plugs"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(D) 燃油泵浦過熱" data-en="(D) Fuel pump overheating"><span class="main-text"></span><span class="tooltip"></span></div></div>
+          <details><summary>看答案與解析</summary>
+            <div class="answer">正解:(B)</div>
+            <div class="explain">影片中技師明確指出故障碼指向「廢氣風門 (Exhaust Flap)」，這會影響排氣背壓與燃油蒸氣回收系統的運作邏輯，導致發動困難與怠速抖動。</div>
+          </details>
+        </div>
+        </div>
+        <div class="qcard ">
+          <div class="qcard-head"><span class="qnum">選擇題 2</span><button class="ts-btn" onclick="seekTo(379)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="hoverable q-text" data-zh="在鑑定車體結構時，使用漆膜儀偵測到數值高達 900 至 1500μm 以上，這在系統鑑定邏輯中代表什麼意義？" data-en="During structural inspection, if the paint thickness gauge detects values between 900 and over 1500μm, what does this signify in system inspection logic?"><span class="main-text"></span><span class="tooltip"></span></div>
+          <div class="q-options"><div class="hoverable q-option" data-zh="(A) 原廠漆面防護加強版" data-en="(A) Original factory reinforced paint protection"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(B) 僅為一般的美容鍍膜層" data-en="(B) Ordinary professional coating layers"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(C) 該處經過嚴重鈑金維修並塗抹大量補土 (Putty)" data-en="(C) Severe body repair with a large amount of body filler (Putty)"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(D) 該處漆面完全正常" data-en="(D) The paint thickness is perfectly normal"><span class="main-text"></span><span class="tooltip"></span></div></div>
+          <details><summary>看答案與解析</summary>
+            <div class="answer">正解:(C)</div>
+            <div class="explain">正常漆面數值通常在 100-200μm 左右，高達 900-1500μm 代表該處曾受損並使用大量補土 (Putty) 修復，漆面非原漆 (Original Paint)。</div>
+          </details>
+        </div>
+        </div>
+        <div class="qcard ">
+          <div class="qcard-head"><span class="qnum">選擇題 3</span><button class="ts-btn" onclick="seekTo(469)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="hoverable q-text" data-zh="技師如何透過「敲擊聲音」判斷車門是否經過重度鈑修？" data-en="How does the technician use the &#x27;tapping sound&#x27; to determine if a door has undergone heavy body repair?"><span class="main-text"></span><span class="tooltip"></span></div>
+          <div class="q-options"><div class="hoverable q-option" data-zh="(A) 聲音越清脆代表補土越厚" data-en="(A) A crisper sound indicates thicker putty"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(B) 聲音越厚實、沉悶代表內部補土 (Putty) 越厚" data-en="(B) A duller, heavier sound indicates thicker internal body filler (Putty)"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(C) 聲音頻率越高代表內部焊接點越多" data-en="(C) A higher frequency sound indicates more internal welding points"><span class="main-text"></span><span class="tooltip"></span></div><div class="hoverable q-option" data-zh="(D) 敲擊聲響完全無法判斷鈑金狀態" data-en="(D) Tapping sound cannot determine the state of the body panel"><span class="main-text"></span><span class="tooltip"></span></div></div>
+          <details><summary>看答案與解析</summary>
+            <div class="answer">正解:(B)</div>
+            <div class="explain">敲擊正常的金屬面板聲音較清脆（薄），若經過大量補土修復，聲音會變得厚實且悶 (Dull sound)，藉此可快速判斷受損區域。</div>
+          </details>
+        </div>
+        </div>
+    <h3>🧠 背誦重點(點空格看答案)</h3>
+    
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 1</span><button class="ts-btn" onclick="seekTo(565)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">在檢查底盤零件時，若發現鋁合金或金屬件表面出現明顯的白色 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">氧化</span></span> 或鏽蝕痕跡，通常可判定該車為曾在高鹽分環境行駛的「雪地車」。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">When inspecting undercarriage parts, if significant white oxidation or rust marks are found on aluminum or metal surfaces, the car is typically identified as a &#x27;Snow Car&#x27; driven in high-salt environments.</div>
+            <div class="explain">融雪鹽會對底盤金屬造成化學腐蝕，是鑑定車輛來源的重要依據。</div>
+          </details>
+          <div class="tag">Undercarriage / Inspection</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 2</span><button class="ts-btn" onclick="seekTo(252)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">針對 A250 的排氣故障，系統中總共有 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">兩</span></span> 顆廢氣風門電磁閥/馬達，維修時若只更換其中一顆，可能導致故障碼持續存在。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">Regarding the A250 exhaust fault, there are a total of two exhaust flap solenoid valves/motors in the system; replacing only one during repair may cause the fault code to persist.</div>
+            <div class="explain">故障排除 (Troubleshooting) 必須考慮系統完整性，避免漏失相同功能的對稱組件。</div>
+          </details>
+          <div class="tag">System-Logic / Diagnostics</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 3</span><button class="ts-btn" onclick="seekTo(379)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">漆膜儀測得 1500μm 以上的數值，表示該部位的 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">補土</span></span> 厚度遠超原廠規範，已失去原漆的價值。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">A paint thickness gauge reading of over 1500μm indicates that the thickness of the body filler (putty) in that area far exceeds factory specifications, losing its original paint value.</div>
+            <div class="explain">數值異常偏高是判定重大鈑修 (Major Body Repair) 的關鍵數據。</div>
+          </details>
+          <div class="tag">Body / Limitation</div>
+        </div>
+        </div>
+        <div class="qcard cloze-card">
+          <div class="qcard-head"><span class="qnum">背誦重點 4</span><button class="ts-btn" onclick="seekTo(866)">🎬 跳轉</button></div>
+          <div class="qcard-body">
+          <div class="q-text">在鑑定二手車時，診斷電腦中若出現大量故障碼，技師應先區分哪些是「歷史紀錄」而哪些是 <span class="blank" onclick="this.classList.add('revealed')"><span class="blank-inner">存在</span></span> (Current) 的功能故障。</div>
+          <details><summary>看中文對照與解析</summary>
+            <div class="q-zh">When inspecting pre-owned cars, if a large number of fault codes appear in the diagnostic tool, the technician should first distinguish which are &#x27;stored history&#x27; and which are &#x27;current/active&#x27; functional failures.</div>
+            <div class="explain">區分 Stored 與 Current 狀態是系統分析 (Systems Analysis) 的基本步驟。</div>
+          </details>
+          <div class="tag">Diagnostics / SOP</div>
+        </div>
+        </div>
+  </div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  var player;
+  var primaryLang = 'zh';
+  var embedBlocked = false;
+  var VIDEO_ID = 'rOMFBhiO8_s';
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '270',
+      width: '480',
+      videoId: VIDEO_ID,
+      playerVars: { 'playsinline': 1, 'origin': window.location.origin },
+      events: { 'onError': onPlayerError }
+    });
+  }
+  function onPlayerError(event) {
+    // 101 / 150 = 影片擁有者禁止嵌入播放,100 = 影片不存在或設為私人,5 = HTML5播放器錯誤
+    if ([101, 150, 100, 5].indexOf(event.data) !== -1) {
+      embedBlocked = true;
+    }
+  }
+  function seekTo(seconds) {
+    if (embedBlocked || !player || !player.seekTo) {
+      window.open('https://www.youtube.com/watch?v=' + VIDEO_ID + '&t=' + seconds + 's', '_blank');
+      return;
+    }
+    player.seekTo(seconds, true);
+    player.playVideo();
+  }
+
+  function applyLang() {
+    var otherLang = primaryLang === 'zh' ? 'en' : 'zh';
+    document.querySelectorAll('.hoverable').forEach(function(el) {
+      var mainEl = el.querySelector('.main-text');
+      var tipEl = el.querySelector('.tooltip');
+      mainEl.textContent = el.dataset[primaryLang] || '';
+      tipEl.textContent = el.dataset[otherLang] || '';
+    });
+  }
+
+  function setLang(lang) {
+    primaryLang = lang;
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    applyLang();
+  }
+
+  document.addEventListener('DOMContentLoaded', applyLang);
+</script>
+</body>
+</html>
